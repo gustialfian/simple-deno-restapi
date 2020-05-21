@@ -4,11 +4,11 @@ let client: Client;
 
 export async function setup(db: DbConfig) {
   client = new Client({
-    user: "sandbox",
-    password: "sandbox",
-    database: "sandbox",
-    hostname: "localhost",
-    port: 5432,
+    user: db.username,
+    password: db.password,
+    database: db.name,
+    hostname: db.host,
+    port: db.port,
   });
   await client.connect();
   console.log("db connected");
@@ -19,9 +19,10 @@ interface DbConfig {
   username: string;
   password: string;
   name: string;
+  port: number;
 }
 
-export async function getClient() {
+export async function getClient(): Promise<Client> {
   if (!client) {
     throw "client not yet setup";
   }

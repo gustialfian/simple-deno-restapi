@@ -5,5 +5,6 @@ export const config = {
     username: "sandbox",
     password: "sandbox",
     name: "sandbox",
+    port: 5432,
   },
 };
