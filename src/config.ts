@@ -1,10 +1,33 @@
+import { config as env } from "https://deno.land/x/dotenv/mod.ts";
+
+const envVal = env();
+console.log(`env:`, envVal);
+
+const DEV = "DEV";
+const PROD = "PROD";
+
+const isDev = () => envVal.APP_ENV === DEV;
+const isProd = () => envVal.APP_ENV === PROD;
+
+let db = isDev()
+  ? {
+    host: envVal.DB_DEV_HOST,
+    port: parseInt(envVal.DB_DEV_PORT),
+    name: envVal.DB_DEV_NAME,
+    username: envVal.DB_DEV_USERNAME,
+    password: envVal.DB_DEV_PASSWORD,
+  }
+  : {
+    host: envVal.DB_PROD_HOST,
+    port: parseInt(envVal.DB_PROD_PORT),
+    name: envVal.DB_PROD_NAME,
+    username: envVal.DB_PROD_USERNAME,
+    password: envVal.DB_PROD_PASSWORD,
+  };
+
 export const config = {
-  port: 8080,
-  db: {
-    host: "localhost",
-    username: "sandbox",
-    password: "sandbox",
-    name: "sandbox",
-    port: 5432,
-  },
+  port: parseInt(envVal.HTTP_PORT),
+  db,
+  isDev,
+  isProd,
 };
