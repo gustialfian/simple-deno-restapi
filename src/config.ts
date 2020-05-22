@@ -26,9 +26,13 @@ let db = isDev()
     password: envVal.DB_PROD_PASSWORD,
   };
 
-export const config = {
+const config = {
   port: parseInt(envVal.HTTP_PORT),
   db,
   isDev,
   isProd,
 };
+
+logger.info(`config: ${JSON.stringify(config, null, 2)}`);
+
+export { config };
