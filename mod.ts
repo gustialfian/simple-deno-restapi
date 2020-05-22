@@ -1,15 +1,7 @@
 import { start } from "./src/app.ts";
-
-import { createLogger } from "https://deno.land/x/deno_structured_logging/mod.ts";
-
-const logger = createLogger();
-
-logger.debug("Debug");
-logger.info("Info");
-logger.warn("Warn");
-logger.error("Error");
-logger.critical("Critical");
+import { logger } from "./src/logger.ts";
+import { config } from "./src/config.ts";
 
 start().then(() => {
-  console.log("server starting");
+  logger.info(`server starting: localhost:${config.port}`);
 });

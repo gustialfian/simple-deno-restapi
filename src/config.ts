@@ -1,7 +1,8 @@
 import { config as env } from "https://deno.land/x/dotenv/mod.ts";
+import { logger } from "./logger.ts";
 
 const envVal = env();
-console.log(`env:`, envVal);
+logger.info(`env: ${JSON.stringify(envVal, null, 2)}`);
 
 const DEV = "DEV";
 const PROD = "PROD";

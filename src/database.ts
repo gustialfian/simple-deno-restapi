@@ -1,4 +1,5 @@
 import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { logger } from "./logger.ts";
 
 let client: Client;
 
@@ -11,7 +12,7 @@ export async function setup(db: DbConfig) {
     port: db.port,
   });
   await client.connect();
-  console.log("db connected");
+  logger.info(`db connected: ${db.name}`);
 }
 
 interface DbConfig {
